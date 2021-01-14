@@ -51,7 +51,7 @@ def handle_guess(letter):
         guessed_letters.append(letter)
         global remaining_guess
         remaining_guess -= 1
-        print(remaining_guess)
+        print('You have this many guesses left:', remaining_guess)
         myword.checkLetter(letter)
         global gameOver
         gameOver = myword.checkFinished()
@@ -60,11 +60,17 @@ def handle_guess(letter):
 #  game engine
 while True:
     print(myword)
+    if gameOver:
+        print('You won!')
+        break
+    elif remaining_guess == 0:
+        print('You ran out of guesses, sorry!')
+        break
     print("Guess a letter", end=": ")
     user_input = input()
-    handle_guess(user_input)
-    if user_input == "q" or gameOver or remaining_guess == 0:
+    if user_input.lower() == "quit":
         print("bye!")
         break
     else:
         print("you typed:", user_input)
+        handle_guess(user_input)
