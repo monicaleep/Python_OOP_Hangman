@@ -19,21 +19,25 @@ class Word():
             if item['letter'] == letter:
                 item['guessed'] = True
 
+    def checkFinished(self):
+        for item in self.dictionary:
+            if not item['guessed']:
+                return False
+                break
+        return True
+
 
 available_words = ['hello', 'goodbye', 'zebra', 'giraffe', 'mastodon',
                    'bizzare', 'python']
 remaining_guess = 8
 gameOver = False
 guessed_letters = []
+myword = Word('hello')  # TODO use getRandomWord here
 
 
 def getRandomWord(available_words):
+    # TODO get random word from available_words
     pass
-
-
-myword = Word('hello')
-print(myword.dictionary)
-print(myword)
 
 
 def handle_guess(letter):
@@ -49,6 +53,8 @@ def handle_guess(letter):
         remaining_guess -= 1
         print(remaining_guess)
         myword.checkLetter(letter)
+        global gameOver
+        gameOver = myword.checkFinished()
 
 
 #  game engine
@@ -57,7 +63,7 @@ while True:
     print("Guess a letter", end=": ")
     user_input = input()
     handle_guess(user_input)
-    if(user_input == "q"):
+    if user_input == "q" or gameOver or remaining_guess == 0:
         print("bye!")
         break
     else:
