@@ -1,3 +1,6 @@
+import random
+
+
 class Word():
     def __init__(self, chosen_word):
         word_dict = []
@@ -35,12 +38,7 @@ available_words = ['hello', 'goodbye', 'zebra', 'giraffe', 'mastodon',
 remaining_guess = 8
 gameOver = False
 guessed_letters = []
-myword = Word('hello')  # TODO use getRandomWord here
-
-
-def getRandomWord(available_words):
-    # TODO get random word from available_words
-    pass
+myword = Word(random.choice(available_words))
 
 
 def handle_guess(letter):
@@ -82,3 +80,4 @@ while True:
         break
     else:
         handle_guess(user_input)
+        print('You have guessed:', guessed_letters)
