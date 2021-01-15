@@ -45,6 +45,9 @@ def handle_guess(letter):
     if len(letter) > 1:
         print('too long!')
         return
+    elif not letter.isalpha():
+        print("Only letters are valid entries, try again.")
+        return
     elif letter in guessed_letters:
         print('You already guessed the letter', letter)
     else:
@@ -58,6 +61,7 @@ def handle_guess(letter):
 
 
 #  game engine
+print("Welcome to hangman, you will have", remaining_guess, "guesses to get the word. Type 'quit' to quit at any time.")
 while True:
     print(myword)
     if gameOver:
