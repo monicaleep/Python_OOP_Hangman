@@ -15,9 +15,12 @@ class Word():
         return text
 
     def checkLetter(self, letter):
+        flag = False
         for item in self.dictionary:
             if item['letter'] == letter:
                 item['guessed'] = True
+                flag = True
+        return flag
 
     def checkFinished(self):
         for item in self.dictionary:
@@ -55,7 +58,9 @@ def handle_guess(letter):
         global remaining_guess
         remaining_guess -= 1
         print('You have this many guesses left:', remaining_guess)
-        myword.checkLetter(letter)
+        flag = myword.checkLetter(letter)
+        if not flag:
+            print('Wrong! The letter', letter, 'is not in the word.')
         global gameOver
         gameOver = myword.checkFinished()
 
@@ -76,5 +81,4 @@ while True:
         print("bye!")
         break
     else:
-        print("you typed:", user_input)
         handle_guess(user_input)
