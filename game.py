@@ -54,11 +54,11 @@ def handle_guess(letter):
     else:
         guessed_letters.append(letter)
         global remaining_guess
-        remaining_guess -= 1
-        print('You have this many guesses left:', remaining_guess)
         flag = myword.check_letter(letter)
         if not flag:
+            remaining_guess -= 1
             print('Wrong! The letter', letter, 'is not in the word.')
+            print('You have this many guesses left:', remaining_guess)
         global gameOver
         gameOver = myword.check_finished()
 
